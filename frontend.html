@@ -1,0 +1,253 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=1024"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<title>Modern Web Frontend Development</title>
+
+	<meta name="description"
+	      content="Modern Web Frontend Development"/>
+	<meta name="author" content="xufei"/>
+
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic"
+	      rel="stylesheet"/>
+
+	<link href="css/impress-demo.css" rel="stylesheet"/>
+
+	<link rel="shortcut icon" href="favicon.png"/>
+	<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+</head>
+
+<body class="impress-not-supported">
+
+<div class="fallback-message">
+	<p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified
+		version of this presentation.</p>
+
+	<p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+	<div id="bored" class="step slide" data-x="-1000" data-y="-1500">
+		<h1>现代Web开发</h1>
+		<h4>徐飞</h4>
+		<blockquote>xu.fei@outlook.com</blockquote>
+	</div>
+
+	<div class="step slide" data-x="0" data-y="-1500">
+		<h2>从哪里开始</h2>
+
+		<div>讲现代Web开发之前，我们需要知道这么几件事情：</div>
+		<div>
+			<ol>
+				<li class="fragment">过去的Web是什么样子</li>
+				<li class="fragment">现代的Web又是怎样的</li>
+				<li class="fragment">我们曾经怎样开发Web应用</li>
+			</ol>
+		</div>
+		<div class="fragment">然后才能开始讲怎样去开发现代化的Web应用。</div>
+	</div>
+
+	<div class="step slide" data-x="1000" data-y="-1500">
+		<h2>过去的Web是什么样子</h2>
+		<ul>
+			<li>过去的Web，最重要的元素是链接。我们看一个网站，它有网站地图，有主界面，我们点击主界面上的链接，跳转到某个页面，所有操作都是在各种跳转中。</li>
+			<li>传统Web时代，关键词是：<strong>跳转</strong>。</li>
+		</ul>
+	</div>
+
+	<div id="title" class="step" data-x="0" data-y="0" data-scale="4">
+		<h2>现代的Web时代是怎样的</h2>
+		<ul>
+			<li>现代Web也称为Web2.0，跟AJAX的兴起密不可分。初期最有名的Web2.0应用是GMail，后面又出现了更多强大的应用，远远超出人们之前的想象。</li>
+			<li>Web2.0应用的理念是淡化“页面”的概念，把Web当作客户端来做，只在必要的时候刷新，一般情况下，界面跟服务端交互的只是数据，通过JavaScript来处理这些数据，而不是由服务端生成界面的HTML字符串再传输到界面上展示。</li>
+			<li>这个时代的关键词是<strong>局部刷新</strong>。</li>
+		</ul>
+	</div>
+
+	<div id="its" class="step" data-x="850" data-y="3000" data-rotate="90" data-scale="5">
+		<h2>我们曾经怎样开发Web应用</h2>
+		<ul>
+			<li class="fragment">
+				单个界面的开发
+				<ol>
+					<li>页面头部包含一些通用的js库，比如jQuery，一些控件库，一些公共样式，一些辅助函数。</li>
+					<li>HTML中写一些id，便于后面做DOM选取</li>
+					<li>页面初始化的时候，根据id对某些DOM元素绑定事件，初始化各种控件。</li>
+					<li>加载默认数据。</li>
+				</ol>
+			</li>
+			<li class="fragment">
+				界面的集成方式
+				<ol>
+					<li>一个主界面，里面放一些选项卡，主界面的顶端或者左侧有一个菜单控件。</li>
+					<li>点击某个菜单，用js创建一个iframe，把它的src设置成点中菜单的路径，然后把这个iframe放在新生成的选项卡上，设置为选中。</li>
+				</ol>
+			</li>
+		</ul>
+	</div>
+
+	<div id="big" class="step" data-x="3500" data-y="2100" data-rotate="180" data-scale="6">
+		<h2>这个过程的优缺点</h2>
+		<ul>
+			<li>
+				优点很明显，每个菜单界面非常独立，开发和调试很方便，每个人在自己机器上开发好，都合到开发环境上，配个菜单就行了。
+			</li>
+			<li>
+				缺点是什么呢？可能我们不太关注。我们写web界面，不可避免要引用一些库，举例说，最流行的jquery，此外还有一些控件等等，还有公共的样式，是不是每个界面都会包含一份？那就是说，每打开一个菜单界面，就要把这些所有的文件加载一遍，很慢。有人说，我有浏览器的文件缓存啊，不会慢的。但是这些js库都要先执行的，营造出自己的上下文。初始化各种map，还要有各种对象关系，函数定义。如果我们打开很多菜单，内存开销会很大。
+			</li>
+		</ul>
+	</div>
+
+	<div id="tiny" class="step" data-x="2825" data-y="2325" data-z="-3000" data-rotate="300" data-scale="1">
+		<h2>现在应当如何开发Web应用</h2>
+		<ol>
+			<li>选用合适的MV*框架</li>
+			<li>界面片段化、模板化</li>
+			<li>JavaScript模块化</li>
+			<li>JavaScript日志和单元测试</li>
+			<li>异步编程</li>
+			<li>统一样式控制</li>
+			<li>响应式设计</li>
+		</ol>
+	</div>
+
+	<div id="ing" class="step" data-x="3500" data-y="-850" data-rotate="270" data-scale="6">
+		<h2>为什么要使用MV*框架</h2>
+		<ul>
+			<li>
+				MV*框架指各种基于MVC、MVP、MVVM模式的前端JavaScript框架，包括Backbone，Angular，Knockout等，它们基本都提供了划分模型、视图和控制器的功能，多数还提供数据绑定等特性。
+			</li>
+			<li>
+				随着界面复杂度的提高，无论是界面还是逻辑都面临着切分的问题。早期的Web应用不必考虑这些，也没有提供解决这些问题的模式，MV*框架们做的就是这方面的工作，它们分割视图，封装逻辑，并且通过一些办法免除开发人员的繁琐工作。
+			</li>
+		</ul>
+	</div>
+
+	<div id="imagination" class="step" data-x="6700" data-y="-300" data-scale="6">
+		<h2>HTML的片段化，模板化</h2>
+		<ul>
+			<li>HTML做片段化、模板化的主要目的是为了重用。</li>
+			<li>
+				传统方式下，HTML界面的重用通过两个方式来做：
+				<ul>
+					<li>iframe直接引入某个html整体，缺点是消耗资源较多，而且不能共享作用域。</li>
+					<li>在js中拼接html字符串，或者创建dom碎片，缺点是不直观。</li>
+				</ul>
+			</li>
+			<li>
+				如果做了HTML的片段化和模板化:
+				<ul>
+					<li>一个界面片段能够以片段的方式存储在单独的文件中，使用方通过AJAX加载这个片段，然后用模板引擎替换其中的内容，把它放置到界面上。</li>
+					<li>这么做的最大好处是可以让UI人员介入，界面布局不再需要JavaScript程序员来处理。</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+	<div id="source" class="step" data-x="6300" data-y="2000" data-rotate="20" data-scale="4">
+		<h2>JavaScript的模块化</h2>
+		<ul>
+			<li>JavaScript的模块化也是为了重用。</li>
+			<li>
+				早期对JavaScript的重用是把某些功能放到一个js文件中，需要这些功能的页面引入这个js。但是产生一些问题：
+				<ol>
+					<li>如果js文件拆分粒度大，可能会有一个页面为了一点点功能，要引入整个js文件。</li>
+					<li>如果js文件拆分粒度小，每个页面要引入的文件会很多。</li>
+					<li>这些js之间的依赖关系如何？无从得知。</li>
+					<li>能不能根据需要，动态加载js文件？</li>
+				</ol>
+			</li>
+			<li>在现代Web的开发过程中，应当遵循AMD之类的模块划分规范，把JavaScript文件的粒度拆得细一些，每个文件中声明自己的模块名称以及所依赖的其他模块，然后通过一些动态加载库比如RequireJS之类的来动态加载执行。</li>
+		</ul>
+	</div>
+
+	<div id="one-more-thing" class="step" data-x="6000" data-y="4000" data-scale="2">
+		<h2>JavaScript日志和单元测试</h2>
+		<ul>
+			<li>
+				长期以来，JavaScript日志一直被忽视，开发人员过于依赖调试器来解决开发中可能出现的问题，而浏览器端的日志因为不能记录到文件，其存在的价值也一直被质疑。JavaScript日志一般是输出到浏览器控制台的，推荐在以下几种情况记录日志：函数的输入输出，事件的响应参数。
+			</li>
+
+			<li>JavaScript模块化之后，就有了做单元测试的基础。现在基于JavaScript的单元测试框架较多，比较流行的有jasmine等。</li>
+		</ul>
+	</div>
+
+	<div id="its-in-3d" class="step" data-x="6200" data-y="4300" data-z="-100" data-rotate-x="-40" data-rotate-y="10"
+	     data-scale="2">
+		tion>
+		<h2>异步编程</h2>
+		<ul>
+			<li>曾经我们很习惯在某些场景下阻塞界面，比如同步的远程请求，比如IE下的模态对话框，在现在这个时代，阻塞几乎可以作为破坏用户体验的一个很大因素。</li>
+			<li>人们不再喜欢当操作的时候，因为某件事情，而停止下来不让其他事情继续做。</li>
+			<li>异步编程相对同步而言，对开发水平要求较高，如果不加控制，会形成嵌套回调，代码看起来很混乱。</li>
+			<li>有一些异步编程模式，比如promise，专门用来解决这类问题。</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="0" data-y="-1500">
+		<h2>统一样式控制</h2>
+		<ul>
+			<li>一个大型系统想要做得风格很一致，就必须做统一的样式控制。</li>
+			<li>样式控制的范围很广，小到一个按钮，一个链接，大到整个页面的布局，都在其中。</li>
+			<li>我们推荐使用bootstrap来做统一的样式控制，这是twitter的一套样式库，它对界面中可能出现的常见元素都做了样式分类定义，使用的时候根据需要来选用，就可以了。</li>
+			<li>bootstrap的样式默认考虑了对PC和移动终端的适应，如果我们需要定制，可以通过一些工具来修改这些样式的具体实现，使其符合我们的需求，业务代码不必修改。</li>
+			<li>这里还有一个基于bootstrap的在线编辑工具：<a href="http://www.layoutit.com/build" target="_blank">layoutit</a></li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="0" data-y="-1500">
+		<h2>响应式设计</h2>
+		<ul>
+			<li>有时候我们的系统还需要同时支持移动终端的访问，而这些终端屏幕的大小有差异，想要用一套代码同时支持各种终端，是一件比较困难的事情。</li>
+			<li>响应式设计就是针对这类场景的一种解决方案。这种方案使用了一种叫做媒体查询的技术，首先在设计的时候为不同分辨率范围分别做设计，然后通过媒体查询，根据当前视图的分辨率，自动适配所对应的样式。</li>
+		</ul>
+	</div>
+
+	<div class="step slide" data-x="0" data-y="-1500">
+		<h2>如何看待jQuery</h2>
+		<ul>
+			<li>在没有MV*框架的时代，jQuery曾经是很多人离不开的好助手，它提供的功能主要是DOM节点的选取和操作、事件的附加与监听，并且封装了一些跨浏览器的兼容。</li>
+			<li>在引入各种MV*框架之后，jQuery的意义已经很小了。现代Web开发框架提倡展现和逻辑分离，程序员不再被推荐直接操作DOM节点，大片DOM的处理被交给了界面模板引擎，而数据的采集和回填则由数据绑定这一新功能接管，各MV*框架也提供了自己对数据处理和事件监听的方式。在这个时候，我们需要问自己，引入90k的一个jQuery.min.js文件，能给我们带来什么？</li>
+		</ul>
+	</div>
+
+	<div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+		<h2>什么阻碍我们拥抱全新Web</h2>
+		<ol>
+			<li>
+				以IE6-8为首的各种老旧浏览器。
+				<ul>
+					<li>充满缺陷</li>
+					<li>性能低下</li>
+					<li>缺少新的标签和API</li>
+				</ul>
+			</li>
+			<li>
+				除此之外，还有别的理由吗？
+			</li>
+		</ol>
+		<div>
+			<h3 class="fragment"><strong>我们自己的学习和认知速度</strong></h3>
+		</div>
+	</div>
+
+</div>
+
+<div class="hint">
+	<p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+	if ("ontouchstart" in document.documentElement) {
+		document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+	}
+</script>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>
